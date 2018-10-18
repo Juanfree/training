@@ -1,0 +1,16 @@
+version: '3.5'
+
+networks:
+  training:
+    external: true
+    name: training
+
+services:
+  elastic_frontend:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    ports:
+      - 9500:9500
+    networks:
+      - training

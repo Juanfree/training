@@ -14,7 +14,7 @@ services:
       - ELASTIC_SEARCH_URL=http://elastic_search:9200
       - NUMBER_OF_DOCS=10000
       - INDEX_NAME=training
-      - FORCE_INIT_INDEX=True
+      - FORCE_INIT_INDEX=True   #PYTHON COMEDY ENTERTAINMENT
       - FORMAT=company_id:int,company_name:str,location:str,transactions:int,last_updated:ts
     networks:
       - training
