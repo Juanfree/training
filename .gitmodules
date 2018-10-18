@@ -1,0 +1,3 @@
+[submodule "faker/docker/rootfs/opt/faker"]
+	path = faker/docker/rootfs/opt/faker
+	url = https://github.com/oliver006/elasticsearch-test-data

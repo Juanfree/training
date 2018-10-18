@@ -1,0 +1,17 @@
+version: '3.5'
+
+networks:
+  training:
+    external: true
+    name: training
+
+services:
+  elastic_search:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    networks:
+    - training
+    ports:
+    - 9200:9200
+    - 9300:9300
