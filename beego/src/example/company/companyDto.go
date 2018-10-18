@@ -7,3 +7,8 @@ type CompanyDto struct {
 	Location             string `json:"location,omitempty"`
 	LastUpdated          int64  `json:"last_updated,omitempty"`
 }
+
+type CompanyDtos struct {
+	CompanyDto []*CompanyDto
+	Total      int64
+}

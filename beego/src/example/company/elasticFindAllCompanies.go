@@ -4,6 +4,8 @@ import (
 	"context"
 	"encoding/json"
 	"github.com/olivere/elastic"
+	"os"
+	"strconv"
 )
 
 type ElasticFindAllCompanies struct {
@@ -11,8 +13,9 @@ type ElasticFindAllCompanies struct {
 
 func (e *ElasticFindAllCompanies) All() ([]*CompanyDto, int64) {
 
-	elastic_url := "http://192.168.99.100:9200"
-	options := elastic.SetURL(elastic_url)
+	elasticUrl := os.Getenv("ELASTIC_URL")
+	elasticUrl = "http://192.168.99.100:9200"
+	options := elastic.SetURL(elasticUrl)
 	client, err := elastic.NewClient(options, elastic.SetSniff(false))
 	defer client.Stop()
 
@@ -20,11 +23,17 @@ func (e *ElasticFindAllCompanies) All() ([]*CompanyDto, int64) {
 		panic(err)
 	}
 
+	size, err := strconv.Atoi(os.Getenv("QUERY_SIZE"))
+	if err != nil {
+		size = 10
+	}
+
 	searchResult, err := client.
 		Search().
 		Index("training").
 		Type("test_type").
 		Query(elastic.NewMatchAllQuery()).
+		Size(size).
 		Do(context.Background())
 
 	if err != nil {

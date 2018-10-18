@@ -1,0 +1,19 @@
+version: '3.5'
+
+networks:
+  training:
+    external: true
+    name: training
+
+services:
+  company-read:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    environment:
+      - QUERY_SIZE=1000
+      - ELASTIC_URL=http://elastic_search:9200
+    ports:
+      - "9999:9999"
+    networks:
+      - training

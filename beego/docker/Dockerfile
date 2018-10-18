@@ -1,11 +1,11 @@
-FROM golang:latest
+FROM golang:latest as builder
 
 ADD src /go/src
 
 RUN go get github.com/astaxie/beego \
     github.com/beego/bee \
-    go get github.com/olivere/elastic
+    github.com/olivere/elastic
 
-EXPOSE 8080
+EXPOSE 9999
 
-ENTRYPOINT bee run tblox
+ENTRYPOINT bee run example

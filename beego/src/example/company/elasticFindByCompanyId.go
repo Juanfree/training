@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"github.com/olivere/elastic"
+	"os"
 )
 
 type ElasticFindByCompanyId struct {
@@ -11,8 +12,9 @@ type ElasticFindByCompanyId struct {
 
 func (e *ElasticFindByCompanyId) ByCompanyId(id int) ([]*CompanyDto, int64) {
 
-	elastic_url := "http://192.168.99.100:9200"
-	options := elastic.SetURL(elastic_url)
+	elasticUrl := os.Getenv("ELASTIC_URL")
+	elasticUrl = "http://192.168.99.100:9200"
+	options := elastic.SetURL(elasticUrl)
 	client, err := elastic.NewClient(options, elastic.SetSniff(false))
 	defer client.Stop()
 
