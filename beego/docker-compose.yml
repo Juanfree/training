@@ -10,10 +10,11 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile
+      target: production
     environment:
       - QUERY_SIZE=1000
       - ELASTIC_URL=http://elastic_search:9200
     ports:
-      - "9999:9999"
+      - "8080:8080"
     networks:
       - training

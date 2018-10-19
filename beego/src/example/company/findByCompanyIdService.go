@@ -1,9 +1,5 @@
 package company
 
-import (
-	"fmt"
-)
-
 type FindByCompanyIdService struct {
 	findByCompanyId FindByCompanyId
 }
@@ -19,9 +15,6 @@ func (this FindByCompanyIdService) Execute(r *FindByIdRequest) ([]*CompanyDto, i
 }
 
 func (this FindByCompanyIdService) ThreadExecute(r *FindByIdRequest) ([]*CompanyDto, int64) {
-
-	fmt.Println("hola")
-
 	id := make(chan int)
 	companyDtos := make(chan CompanyDtos)
 
